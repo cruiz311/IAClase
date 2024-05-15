@@ -6,7 +6,6 @@ public class DataViewBase
 {
     #region RangeView
 
-
     [Header("----- RangeView -----")]
     [Range(0, 180)]
     public float angle = 30f;
@@ -62,10 +61,6 @@ public class DataViewBase
         {
             return this.InSight;
         }
-
-
-
-
         this.InSight = true;
         return this.InSight;
     }
@@ -198,7 +193,6 @@ public class VisionSensor : MonoBehaviour
     }
     public void LoadComponent()
     {
-
         MainVision.Owner = GetComponent<Health>();
         Framerate = 0;
         index = 0;
