@@ -15,12 +15,16 @@ public class Health : MonoBehaviour
 
     [Header("CountHealth")]
     public int health;
-    public int healthMax;
+    public int healthMax = 100;
     public bool IsDead { get => (health <= 0); }
 
     [Header("AimOffSet")]
     public Transform AimOffset;
-    public Health HurtingMe;
 
     public unitSC unitSC;
+    public unitSC[] unitSCAllies;
+    public virtual void LoadComponent()
+    {
+        health = healthMax;
+    }
 }

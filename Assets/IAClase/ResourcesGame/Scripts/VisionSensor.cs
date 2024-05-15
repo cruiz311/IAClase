@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class DataViewBase
 {
     #region RangeView
-
     [Header("----- RangeView -----")]
     [Range(0, 180)]
     public float angle = 30f;
@@ -54,9 +53,6 @@ public class DataViewBase
         {
             return this.InSight;
         }
-
-
-
         if (Physics.Linecast(origin, dest, this.Occlusionlayers) && this.InsideObject)
         {
             return this.InSight;
@@ -170,8 +166,12 @@ public class VisionSensor : MonoBehaviour
     [Header("Main Vision")]
     public DataViewBase MainVision = new DataViewBase();
     [Space(20)]
+    [Header("Onwer Health")]
+    public Health health;
     [Header("Enemy View")]
     public Health EnemyView;
+    [Header("Allied view")]
+    public Health AlliedView;
     [Space(20)]
     [Header("Scan Layer Mask")]
     public LayerMask ScanLayerMask; // Capa de los objetos a detectar
@@ -201,6 +201,7 @@ public class VisionSensor : MonoBehaviour
         {
             arrayRate[i] = (float)UnityEngine.Random.Range(randomWaitScandMin, randomWaitScandMax);
         }
+        health = GetComponent<Health>();
     }
     private void Update()
     {
@@ -220,15 +221,21 @@ public class VisionSensor : MonoBehaviour
     private void Scan()
     {
         EnemyView = null;
+        AlliedView = null;
         MainVision.InSight = false;
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, MainVision.distance, ScanLayerMask);
 
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             Health health = targetsInViewRadius[i].GetComponent<Health>();
-            if (health != null && MainVision.IsInSight(health.AimOffset))
+            if (health != null && IsNotIsThis(health.gameObject)&& MainVision.IsInSight(health.AimOffset))
             {
-                EnemyView = health;
+                if (!IsAllies(health))
+                {
+                    EnemyView = health;
+                }
+                else
+                    AlliedView = health;
             }
         }
     }
@@ -237,8 +244,21 @@ public class VisionSensor : MonoBehaviour
     {
         MainVision.CreateMesh();
     }
-
-    // Método para dibujar el radio de visión en el editor
+    public virtual bool IsAllies(Health heatlhScan)
+    {
+        for (int j = 0; (health != null && j < health.unitSCAllies.Length); j++)
+        {
+            if (health.unitSCAllies[j] == heatlhScan.unitSC)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public virtual bool IsNotIsThis(GameObject obj2)
+    {
+        return (gameObject.GetInstanceID() != obj2.GetInstanceID());
+    }
     private void OnDrawGizmos()
     {
         MainVision.OnDrawGizmos();
