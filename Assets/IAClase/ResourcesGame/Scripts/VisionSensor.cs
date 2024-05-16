@@ -248,7 +248,7 @@ public class VisionSensor : MonoBehaviour
     {
         for (int j = 0; (health != null && j < health.unitSCAllies.Length); j++)
         {
-            if (health.unitSCAllies[j] == heatlhScan.unitSC)
+            if (health.unitSCAllies[j] == heatlhScan._unitSC)
             {
                 return true;
             }

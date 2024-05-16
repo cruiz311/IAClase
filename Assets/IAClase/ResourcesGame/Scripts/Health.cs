@@ -6,6 +6,7 @@ public enum unitSC
     Police,
     Civil,
     Ladron,
+    None,
 }
 public class Health : MonoBehaviour 
 {
@@ -14,17 +15,19 @@ public class Health : MonoBehaviour
     public int wc = 0;
 
     [Header("CountHealth")]
-    public int health;
+    public int health = 100;
     public int healthMax = 100;
     public bool IsDead { get => (health <= 0); }
 
     [Header("AimOffSet")]
     public Transform AimOffset;
 
-    public unitSC unitSC;
+    public unitSC _unitSC;
     public unitSC[] unitSCAllies;
     public virtual void LoadComponent()
     {
         health = healthMax;
     }
+
+
 }

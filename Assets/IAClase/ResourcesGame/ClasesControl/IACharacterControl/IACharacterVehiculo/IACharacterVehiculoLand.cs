@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class IACharacterVehiculoLand : IACharacterVehiculo
 {
     protected Vector3 normales = Vector3.zero;
-    public NavMeshAgent agent { get; set; }
     protected float speedRotation = 0;
 
     public float RangeWander;
@@ -17,7 +16,6 @@ public class IACharacterVehiculoLand : IACharacterVehiculo
     public override void LoadComponent()
     {
         base.LoadComponent();
-        agent = GetComponent<NavMeshAgent>();
     }
     public virtual void LookEnemy()
     {

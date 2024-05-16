@@ -6,13 +6,13 @@ using BehaviorDesigner.Runtime.Tasks;
 [TaskCategory("IA SC/NODE BASE")]
 public class ActionNode : Action
 {
-
     protected IACharacterVehiculo _iACharacterVehiculo;
     protected IACharacterAction _iACharacterAction;
-    protected unitSC unitSC;
+    protected unitSC _unitSC;
 
     public override void OnStart()
     {
+        base.OnStart();
         _iACharacterVehiculo = GetComponent<IACharacterVehiculo>();
         if(_iACharacterVehiculo == null)
             Debug.LogWarning("NOT LOAD COMPONENT AICHARACTER VEHICULO");
@@ -22,13 +22,11 @@ public class ActionNode : Action
 
         if(_iACharacterVehiculo != null)
         {
-            unitSC = this._iACharacterVehiculo.health.unitSC;
+            _unitSC = this._iACharacterVehiculo.health._unitSC;
         }
         else if (_iACharacterAction != null)
         {
-            unitSC = this._iACharacterAction.health.unitSC;
+            _unitSC = this._iACharacterAction.health._unitSC;
         }
-
-        base.OnStart();
     }
 }
