@@ -8,4 +8,6 @@ public class IACharacterActionLandPolice : IACharacterActionLand
     {
         base.LoadComponent();
     }
+
+    
 }
