@@ -7,13 +7,22 @@ public class CarController : MonoBehaviour
 {
     public InputManager manager;
     public List<WheelCollider> throttleWheels;
-    public List<WheelCollider> steeringWheels;
+    public List<GameObject> steeringWheels;
+    public List<GameObject> meshes;
     public float strengthCoefficient = 20000f;
     public float maxTurn = 20f;
+    public Transform centerMass;
+    public Rigidbody Rigidbody;
 
     private void Start()
     {
         manager = GetComponent<InputManager>();
+        Rigidbody = GetComponent<Rigidbody>();
+
+        if (centerMass)
+        {
+            Rigidbody.centerOfMass = centerMass.position;
+        }
     }
     private void Update()
     {
@@ -21,9 +30,15 @@ public class CarController : MonoBehaviour
         {
             wheelCollider.motorTorque = strengthCoefficient * Time.deltaTime * manager.throttle;
         }
-        foreach (WheelCollider wheelCollider in steeringWheels)
+        foreach (GameObject wheelCollider in steeringWheels)
         {
-            wheelCollider.steerAngle = maxTurn * manager.steer;
+            wheelCollider.GetComponent<WheelCollider>().steerAngle = maxTurn * manager.steer;
+            wheelCollider.transform.localEulerAngles = new Vector3 (0, manager.steer * maxTurn, 0);
+        }
+
+        foreach(GameObject meshe in meshes)
+        {
+            meshe.transform.Rotate(Rigidbody.velocity.magnitude * (transform.InverseTransformDirection(Rigidbody.velocity).z >= 0? 1: -1) / (2*Mathf.PI * 0.33f),0f,0f);
         }
     }
 }
