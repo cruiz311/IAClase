@@ -4,7 +4,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime.Tasks;
 [TaskCategory("MyAI/View")]
 
-public class ActionNodeNotViewLadron : ActionNodeView
+public class ActionNodeNotViewEnemy : ActionNodeView
 {
     public override void OnStart()
     {

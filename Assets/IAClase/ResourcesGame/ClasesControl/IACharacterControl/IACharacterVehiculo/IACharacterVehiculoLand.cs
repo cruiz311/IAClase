@@ -10,6 +10,11 @@ public class IACharacterVehiculoLand : IACharacterVehiculo
 
     public float RangeWander;
     Vector3 positionWander;
+
+    private void Start()
+    {
+        MoveToWander();
+    }
     public override void LoadComponent()
     {
         base.LoadComponent();

@@ -27,8 +27,8 @@ public class ActionFollowEnemy : ActionNodeVehicle
             case unitSC.Police:
                 if (_iACharacterVehiculo is IACharacterVehiculoLandPolice)
                 {
-                    ((IACharacterVehiculoLandCivil)_iACharacterVehiculo).MoveToEnemy();
-                    ((IACharacterVehiculoLandCivil)_iACharacterVehiculo).LookEnemy();
+                    ((IACharacterVehiculoLandPolice)_iACharacterVehiculo).MoveToEnemy();
+                    ((IACharacterVehiculoLandPolice)_iACharacterVehiculo).LookEnemy();
                 }
                 break;
             case unitSC.Civil:
@@ -36,8 +36,8 @@ public class ActionFollowEnemy : ActionNodeVehicle
             case unitSC.Ladron:
                 if (_iACharacterVehiculo is IACharacterVehiculoLandLadron)
                 {
-                    ((IACharacterVehiculoLandCivil)_iACharacterVehiculo).MoveToEnemy();
-                    ((IACharacterVehiculoLandCivil)_iACharacterVehiculo).LookEnemy();
+                    ((IACharacterVehiculoLandLadron)_iACharacterVehiculo).MoveToEnemy();
+                    ((IACharacterVehiculoLandLadron)_iACharacterVehiculo).LookEnemy();
                 }
                 break;
             case unitSC.None:
