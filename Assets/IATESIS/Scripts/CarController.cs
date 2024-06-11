@@ -11,7 +11,6 @@ public class CarController : MonoBehaviour
     public List<GameObject> meshes;
     public float strengthCoefficient = 20000f;
     public float maxTurn = 20f;
-    public Transform centerMass;
     public Rigidbody Rigidbody;
 
     private void Start()
@@ -19,10 +18,7 @@ public class CarController : MonoBehaviour
         manager = GetComponent<InputManager>();
         Rigidbody = GetComponent<Rigidbody>();
 
-        if (centerMass)
-        {
-            Rigidbody.centerOfMass = centerMass.position;
-        }
+        
     }
     private void Update()
     {
