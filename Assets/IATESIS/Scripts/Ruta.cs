@@ -7,6 +7,7 @@ public class Ruta : MonoBehaviour
     public Transform initPosition;
     public GameObject carro;
     public List<GameObject> alineaciones;
+    public int currentAlineacionIndex = 0;
     private void Start()
     {
         GameObject nuevoCarro = Instantiate(carro, initPosition.position, carro.transform.rotation);
@@ -19,7 +20,22 @@ public class Ruta : MonoBehaviour
         foreach (GameObject t in alineaciones)
         {
             t.SetActive(false);
-            alineaciones[0].SetActive(true);
+            alineaciones[currentAlineacionIndex].SetActive(true);
         }
     }
+
+    public void CambiarAlineacion()
+    {
+        alineaciones[currentAlineacionIndex].SetActive(false);
+        currentAlineacionIndex++;
+
+        if (currentAlineacionIndex >= alineaciones.Count)
+        {
+            // cambiar de scena
+            return;
+        }
+
+        alineaciones[currentAlineacionIndex].SetActive(true);
+    }
+
 }
