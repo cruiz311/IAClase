@@ -8,9 +8,9 @@ public class Semaforo : MonoBehaviour
     public GameObject amberLight;
     public GameObject greenLight;
 
-    public float redDuration = 5.0f; // Duration of red light
-    public float amberDuration = 2.0f; // Duration of amber light
-    public float greenDuration = 5.0f; // Duration of green light
+    public float redDuration = 5.0f;
+    public float amberDuration = 2.0f;
+    public float greenDuration = 5.0f;
 
     private IEnumerator Start()
     {

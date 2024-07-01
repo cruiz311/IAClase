@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ruta : MonoBehaviour
 {
@@ -8,20 +9,20 @@ public class Ruta : MonoBehaviour
     public GameObject carro;
     public List<GameObject> alineaciones;
     public int currentAlineacionIndex = 0;
+
     private void Start()
     {
         GameObject nuevoCarro = Instantiate(carro, initPosition.position, carro.transform.rotation);
         Init();
     }
 
-
     public void Init()
     {
         foreach (GameObject t in alineaciones)
         {
             t.SetActive(false);
-            alineaciones[currentAlineacionIndex].SetActive(true);
         }
+        alineaciones[currentAlineacionIndex].SetActive(true);
     }
 
     public void CambiarAlineacion()
@@ -31,11 +32,11 @@ public class Ruta : MonoBehaviour
 
         if (currentAlineacionIndex >= alineaciones.Count)
         {
-            // cambiar de scena
+            // Lógica para cambiar de escena
+            SceneManager.LoadScene("NombreDeLaSiguienteEscena");
             return;
         }
 
         alineaciones[currentAlineacionIndex].SetActive(true);
     }
-
 }
