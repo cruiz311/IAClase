@@ -10,6 +10,8 @@ public enum semaforo
 }
 public class Semaforo : MonoBehaviour
 {
+
+    public DeteccionErrores deteccionErrores;
     public semaforo colorSemaforo;
     public GameObject redLight;
     public GameObject amberLight;
@@ -49,5 +51,19 @@ public class Semaforo : MonoBehaviour
     private void SetLight(GameObject light, bool isActive)
     {
         light.SetActive(isActive);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Carro")&&colorSemaforo == semaforo.rojo)
+        {
+            deteccionErrores.puntos -= 30;
+            deteccionErrores.ActualizarMensaje("Respeta los semaforos, es una falta grave");
+        }
     }
 }

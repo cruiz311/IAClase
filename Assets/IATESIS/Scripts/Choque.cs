@@ -5,19 +5,21 @@ using UnityEngine;
 public class Choque:MonoBehaviour
 {
     public DeteccionErrores deteccionErrores;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Carro"))
+        if (collision.gameObject.CompareTag("Carro"))
         {
             deteccionErrores.puntos -= 30;
             deteccionErrores.ActualizarMensaje("Haz chocado el vehículo, recibiras una penalizacion de 30 puntos, recuerda ver tus espejos para tener una mejor visualiación de tu entorno");
         }
     }
-    private void OnTriggerExit(Collider other)
+
+    private void OnCollisionExit(Collision collision)
     {
-        if (other.CompareTag("Carro"))
+        if (collision.gameObject.CompareTag("Carro"))
         {
-            deteccionErrores.ActualizarMensaje("Mantente siempre en tu carril");
+            deteccionErrores.ActualizarMensaje("Mira bien tus espejos cuando estes al volante");
         }
     }
 }
